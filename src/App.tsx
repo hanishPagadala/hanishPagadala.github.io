@@ -1,3 +1,4 @@
+import GuidedTour from './GuidedTour'
 import AccessibilityControls from './AccessibilityControls'
 import Localize from './Localize'
 import { useEffect, useState } from 'react'
@@ -72,7 +73,7 @@ function App() {
     try { await navigator.clipboard.writeText(email); setCopied(true) } catch { window.location.href = `mailto:${email}` }
   }
   return <Localize><>
-    <AmbientBackground />
+    <AmbientBackground /><GuidedTour />
     <a className="skip-link" href={visualize ? "#visualize" : "#main"}>Skip to content</a>
     <header className="site-header"><div className="shell header-inner">
       <a href="#home" className="wordmark" aria-label="Hanish Pagadala home">h<span>p</span><i>.</i></a>
@@ -106,3 +107,4 @@ function App() {
   </></Localize>
 }
 export default App
+

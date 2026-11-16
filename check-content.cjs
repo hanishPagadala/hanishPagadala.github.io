@@ -66,7 +66,8 @@ assert(!/<article[^>]*>[\s\S]*?<svg[\s\S]*?<\/article>/.test(html), 'Project car
 
 
 assert((html.match(/class="project-inline"/g) || []).length === 13, 'Each project needs inline details')
-assert(!html.includes('<dialog'), 'Project overlays must be absent')
+assert([...html.matchAll(/<article[\s\S]*?<\/article>/g)].every(match => !match[0].includes('<dialog')), 'Project overlays must be absent')
+assert(html.includes('class="tour-dialog"') && !html.includes('class="tour-invite"'), 'Tour must wait for invitation and consent')
 
 assert(html.includes('aria-label="Page reading progress"'), 'Reading progress missing')
 assert(html.includes('Explore my mind map'), 'Exploration invitation missing')
@@ -82,3 +83,4 @@ assert(html.includes('class="project-archive"'), 'Additional project section mis
 assert(html.includes('CommuncationProtocols_NewsSharingProtocol'), 'Resume-provided source link missing')
 assert(html.includes('<section class="project-archive"'), 'Additional projects must be a permanently visible section')
 assert(!html.includes('<details class="project-archive"'), 'Additional projects must not require expansion')
+
