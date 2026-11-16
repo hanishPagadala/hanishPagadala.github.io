@@ -39,6 +39,12 @@ export default function MindMap() {
   const nodes = active ? active.entries : branches
   const positions = active ? leafPositions : overviewPositions
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }) }, [])
+  useEffect(() => {
+    if (!motion || matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const panel = document.getElementById('map-detail')
+    const animation = panel?.animate?.([{ opacity: 0.4, translate: '0 8px' }, { opacity: 1, translate: '0 0' }], { duration: 350, easing: 'cubic-bezier(.22,1,.36,1)' })
+    return () => animation?.cancel()
+  }, [branchId, entryId, motion])
   function reset() { setBranchId(null); setEntryId(null); setHovered(null) }
   return <section className={`mindmap-page ${motion ? 'motion-on' : ''}`} id="visualize" aria-labelledby="mindmap-title">
     <div className="map-topbar"><div><p className="eyebrow">AN EXPLORABLE PORTRAIT</p><h1 id="mindmap-title">A few worlds. <em>One Hanish.</em></h1></div><div className="map-actions"><button onClick={() => setMotion(!motion)} aria-pressed={motion}>{motion ? 'Pause motion' : 'Enable motion'}</button><a href="#home">Back to portfolio <span aria-hidden="true">↗</span></a></div></div>

@@ -1,0 +1,43 @@
+/* Details live in the browser's top layer; opening them never changes a grid row. */
+.project-open{display:flex;justify-content:space-between;align-items:center;gap:20px;width:100%;border:0;border-top:1px solid var(--line);padding:21px 0;margin-top:auto;background:transparent;text-align:left;font-size:14px;line-height:1.7;transition:color .25s ease}
+.project-open>span{font-size:21px;color:var(--project-accent);transition:translate .35s var(--ease-out)}
+.project-open:hover,.project-open:focus-visible{color:var(--project-accent)}
+.project-open:hover>span{translate:3px -3px}
+.project-dialog{padding:0;border:1px solid var(--line);border-radius:20px;background:var(--surface);color:var(--text);width:min(700px,calc(100% - 32px));max-width:none;max-height:88dvh;margin:auto;overflow:auto;overscroll-behavior:contain;box-shadow:0 30px 100px #0004;scrollbar-width:thin}
+.project-dialog::backdrop{background:color-mix(in srgb,var(--bg) 35%,#101522a8);backdrop-filter:blur(8px)}
+.project-dialog[open]{animation:projectDialogIn .45s var(--ease-out) both}
+.project-dialog[open]::backdrop{animation:projectBackdropIn .3s ease both}
+.project-dialog-panel{padding:30px 36px 24px;position:relative;cursor:default}
+.project-dialog-panel::before{content:'';position:absolute;top:0;left:36px;width:64px;height:3px;background:var(--project-accent)}
+.project-dialog-top{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:25px}
+.project-dialog-top>.eyebrow{font-size:11px;color:var(--muted)}
+.dialog-close{display:flex;align-items:center;gap:15px;background:var(--soft);border:1px solid var(--line);border-radius:24px;padding:8px 13px;font-size:12px;line-height:1.7;transition:background .2s,transform .3s var(--ease-out)}
+.dialog-close>span{font-size:22px;line-height:1}.dialog-close:hover{background:var(--line);transform:translateY(-1px)}
+.dialog-status{font:12px/1.7 'Courier New',monospace;color:var(--project-accent)}
+.project-dialog h2{font-size:clamp(27px,4vw,36px);line-height:1.2;letter-spacing:-1px;margin-top:13px;text-wrap:balance}
+.dialog-context{font:12px/1.8 'Courier New',monospace;color:var(--muted);margin-top:15px}
+.dialog-intro{font-size:18px;line-height:1.8;color:var(--muted);margin-top:22px}
+.project-dialog .tags{margin-block:23px 28px}
+.dialog-contributions{border-top:1px solid var(--line);padding-top:24px}
+.dialog-contributions h3{font-size:16px;letter-spacing:0;font-weight:600}
+.dialog-contributions ul{padding-left:19px;margin:18px 0 25px;font-size:17px;line-height:1.85;color:var(--muted)}
+.dialog-contributions li+li{margin-top:15px}.dialog-contributions li::marker{color:var(--project-accent)}
+.project-dialog[open] .dialog-contributions li{animation:projectContributionIn .5s var(--ease-out) both;animation-delay:calc(80ms + var(--item-index)*65ms)}
+.dialog-footer{display:flex;align-items:center;justify-content:space-between;gap:25px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:20px}
+.dialog-footer>span{font-size:11px;color:var(--muted)}
+.dialog-footer>button{background:transparent;border:0;color:var(--project-accent);font-size:13px;padding:8px 0;display:flex;gap:18px;align-items:center}
+.project-card{background:linear-gradient(145deg,var(--surface) 65%,color-mix(in srgb,var(--project-accent) 3%,var(--surface)));transition:transform .55s var(--ease-out),border-color .35s,box-shadow .55s var(--ease-out)}
+.project-card:hover,.project-card:focus-within{transform:translateY(-6px);box-shadow:0 20px 42px color-mix(in srgb,var(--project-accent) 12%,transparent)}
+.project-card:has(.project-dialog[open]){transform:none}
+.project-card::before{transition:width .65s var(--ease-out),opacity .3s}
+.project-card:hover::before{width:110px}
+.project-card .tags li{transition:background .3s ease,color .3s ease,translate .4s var(--ease-out)}
+.project-card .tags li:hover{background:color-mix(in srgb,var(--project-accent) 9%,var(--soft));color:var(--project-accent);translate:0 -2px}
+.project-body>h3{transition:color .3s ease}.project-card:hover .project-body>h3{color:var(--project-accent)}
+.filters button{position:relative;overflow:hidden;transition:background .35s,color .25s,box-shadow .35s var(--ease-out),translate .35s var(--ease-out)}
+.filters button[aria-pressed=true]{box-shadow:0 4px 14px color-mix(in srgb,var(--text) 13%,transparent)}
+@keyframes projectDialogIn{from{opacity:0;translate:0 28px;scale:.975}to{opacity:1;translate:0 0;scale:1}}
+@keyframes projectBackdropIn{from{opacity:0}to{opacity:1}}
+@keyframes projectContributionIn{from{opacity:0;translate:0 10px}to{opacity:1;translate:0 0}}
+@media(max-width:600px){.project-dialog{width:calc(100% - 20px);max-height:90dvh;border-radius:17px}.project-dialog-panel{padding:24px}.project-dialog-panel::before{left:24px}.dialog-intro,.dialog-contributions ul{font-size:16px}.project-dialog-top{margin-bottom:22px}.dialog-close{min-height:44px}.dialog-footer{gap:12px}}
+@media(prefers-reduced-motion:reduce){.project-dialog,.project-dialog::backdrop,.project-dialog *{animation:none!important;transition:none!important}.project-card:hover,.project-card:focus-within{transform:none}.project-open:hover>span,.project-card .tags li:hover{translate:none}}

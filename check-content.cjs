@@ -57,3 +57,18 @@ assert(!visualPage.includes('PROJECT EXPLORER'), 'Visualize must be a full page 
 assert(visualPage.includes('aria-current="page"'), 'Visualize navigation must indicate active page')
 delete global.window
 
+
+assert(!html.includes('project-art'), 'Project illustrations must stay removed')
+assert(!/<article[^>]*>[\s\S]*?<svg[\s\S]*?<\/article>/.test(html), 'Project cards must not contain illustrations')
+
+
+
+
+assert((html.match(/class="project-inline"/g) || []).length === 13, 'Each project needs inline details')
+assert(!html.includes('<dialog'), 'Project overlays must be absent')
+
+assert(html.includes('aria-label="Page reading progress"'), 'Reading progress missing')
+assert((html.match(/class="start-point"/g) || []).length === 3, 'Expected three suggested starting points')
+assert(html.includes('Explore my mind map'), 'Exploration invitation missing')
+for (const id of ['04', '07', '11']) assert(html.includes('id="project-' + id + '"'), 'Featured destination missing: ' + id)
+

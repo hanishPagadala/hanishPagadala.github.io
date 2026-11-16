@@ -10,23 +10,22 @@ export type Project = {
   description: string
   tags: string[]
   contributions: string[]
-  drawing?: 'wing' | 'wheel' | 'optical'
 }
 
 export const projects: Project[] = [
   {
-    id: '01', title: 'Oblique Wing Drone', category: 'Aerospace & photonics', context: 'CSME Concordia · Electronics lead', status: 'Work in progress', ongoing: true, drawing: 'wing',
+    id: '01', title: 'Oblique Wing Drone', category: 'Aerospace & photonics', context: 'CSME Concordia · Electronics lead', status: 'Work in progress', ongoing: true,
     description: 'Electronics and avionics integration for an aircraft that approaches flight from a different angle.',
     tags: ['Avionics', 'Telemetry', 'System integration'],
     contributions: ['Lead electronics integration and selection of flight-control, sensor, telemetry, and avionics components.', 'Design wiring, component placement, and interfaces for GPS, airspeed sensing, power monitoring, and onboard logging.', 'Prepare flight-controller and telemetry setup for sensor acquisition, ground-station communication, and readiness testing.'],
   },
   {
-    id: '02', title: 'Reaction Wheel', category: 'Embedded & robotics', context: 'Ongoing engineering project', status: 'Work in progress', ongoing: true, drawing: 'wheel',
+    id: '02', title: 'Reaction Wheel', category: 'Embedded & robotics', context: 'Ongoing engineering project', status: 'Work in progress', ongoing: true,
     description: 'An ongoing exploration of reaction-wheel systems and attitude control.', tags: ['Control systems', 'Angular momentum'],
     contributions: ['Project currently in development. Hardware, implementation details, and test results will be shared as the work progresses.'],
   },
   {
-    id: '03', title: 'Lumentum/IEEE: Laser Transmission', category: 'Aerospace & photonics', context: 'Lumentum / IEEE', status: 'Work in progress', ongoing: true, drawing: 'optical',
+    id: '03', title: 'Lumentum/IEEE: Laser Transmission', category: 'Aerospace & photonics', context: 'Lumentum / IEEE', status: 'Work in progress', ongoing: true,
     description: 'An ongoing laser-transmission project exploring communication through light.', tags: ['Photonics', 'Optical communication'],
     contributions: ['Project currently in development. System architecture, individual contributions, and measurements will be documented as the work progresses.'],
   },

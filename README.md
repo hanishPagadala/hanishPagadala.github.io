@@ -42,3 +42,15 @@ The separate `portfolio-source.zip` includes a full clean source project, exclud
 The repository `hanishPagadala.github.io` uses Vite's default `/` base. The included `.github/workflows/deploy.yml` is manual only. Nothing has been pushed or published.
 
 When ready, push reviewed changes, set repository Settings → Pages → Source to GitHub Actions, and manually run Deploy portfolio to GitHub Pages. The workflow installs dependencies, builds, and deploys `dist/`.
+
+Project cards use a consistent illustration-free layout with discipline accents, readable typography, subtle hover treatment, and expandable contributions. The interactive wing remains in the hero; project illustrations are omitted.
+
+
+Color and motion: Polish.css provides shared indigo/teal neutral-surface tokens for both themes, restrained warm accents, reduced-motion-aware scroll entrances and detail transitions. Run node check-colors.cjs for the text/surface palette contrast check (not a full accessibility audit).
+
+
+Project details expand inline with smooth height transitions. Cards align independently at the top of each row, so opening one does not stretch its neighbor. There are no project overlays or focus changes.
+
+
+Design references reviewed: https://brittanychiang.com/ (content hierarchy), https://rauno.me/ (interaction craft and restraint), and https://bruno-simon.com/ (personal exploration). Adaptations include active section navigation, reading progress, suggested project entry points with inline detail navigation, sticky category labels, editorial type hierarchy, and an invitation into the existing mind map. No reference-site assets or code were copied.
+
