@@ -66,3 +66,12 @@ Content focus: three featured engineering stories (Robowars, hovercraft, News Sh
 
 Additional projects are permanently visible, with discipline filters. Only individual project contribution details collapse. Filter changes use a brief staggered entrance, with subtle hover and inline-detail transitions; reduced-motion disables these effects.
 
+
+Mind-map refinement: instructions and the back-to-branches control now occupy a separate footer below the canvas, so nodes cannot cover them. The center is smaller, satellite labels are clearer, connections use balanced curves, the fifth satellite has more clearance, and node/detail styling is quieter and more consistent.
+
+
+Mind-map ambient background: low-opacity indigo/teal radial fields drift over 32–38 seconds. Pause motion freezes the flow; reduced-motion preferences keep it static. The hub and wire paths remain steady so continuous movement stays in the background.
+
+
+The hero now uses the supplied portrait (public/hanish-portrait.jpeg) in a responsive frame. The original photo is unchanged; CSS handles composition and a gentle hover zoom. The aircraft illustration and sweep control have been removed from the introduction. The standalone preview embeds the portrait so it opens without a separate image file.
+

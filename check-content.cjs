@@ -41,7 +41,8 @@ const anchors = [...html.matchAll(/href="#([^"]+)"/g)].map(m => m[1])
 for (const anchor of anchors) assert(anchor === 'visualize' || html.includes(`id="${anchor}"`), `Broken anchor: ${anchor}`)
 console.log('Passed: 13 rendered project cards; four populated disciplines; three ongoing projects; approved contact details only; social and résumé links; valid section links; unique SVG IDs.')
 
-assert(html.includes('max="45"'), 'Wing sweep must stop at 45 degrees')
+assert(html.includes('alt="Portrait of Hanish Pagadala"'), 'Hero portrait missing')
+assert(!html.includes('Illustrative wing sweep angle'), 'Aircraft interaction must be removed')
 assert(!html.includes('55°'), 'Old wing limit must be absent')
 
 assert(html.includes('href="#visualize"'), 'Visualize navigation link missing')

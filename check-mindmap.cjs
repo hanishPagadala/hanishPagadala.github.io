@@ -34,9 +34,8 @@ function walk(element, predicate, output = []) {
 const buttons = tree => walk(tree, element => element.type === 'button')
 const find = (tree, text) => buttons(tree).find(button => renderToStaticMarkup(button).includes(text))
 let tree = render()
-assert(!tree.props.className.includes('motion-on'), 'Continuous motion should default to off')
-find(tree, 'Enable motion').props.onClick()
-tree = render()
+assert(tree.props.className.includes('motion-on'), 'Ambient flow should be enabled when reduced motion is not requested')
+
 assert(buttons(tree).filter(b => b.props.className?.includes('branch-bubble')).length === 6, 'Expected six root branches')
 find(tree, 'Embedded &amp; robotics').props.onMouseEnter()
 tree = render()

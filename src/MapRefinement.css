@@ -1,0 +1,34 @@
+/* A quieter constellation, with instructions outside the diagram's coordinate space. */
+.map-layout{gap:24px;align-items:start}
+.map-stage{min-width:0;border:1px solid var(--line);border-radius:16px;overflow:visible;background:var(--surface)}
+.map-canvas{border:0;border-radius:16px 16px 0 0;min-height:610px;height:calc(100dvh - 310px);max-height:780px;background:radial-gradient(color-mix(in srgb,var(--line) 65%,transparent) .7px,transparent .7px);background-size:26px 26px}
+.map-rings{width:220px;height:220px;opacity:.45;border-color:color-mix(in srgb,var(--accent) 20%,var(--line))}
+.map-rings::before{inset:-43px;opacity:.35}.map-rings::after{display:none}
+.map-center{width:145px;height:145px;gap:10px;background:var(--text);box-shadow:0 0 0 8px color-mix(in srgb,var(--accent) 4%,transparent),0 12px 30px color-mix(in srgb,var(--text) 8%,transparent)}
+.map-center strong{font-size:30px;letter-spacing:-.8px;line-height:1.2}
+.map-center>span:last-child{font:10px/1.6 Arial,Helvetica,sans-serif;letter-spacing:.3px;max-width:118px}
+.center-orbit{inset:-13px;border-style:solid;opacity:.25}
+.map-node-position{width:174px}
+.map-bubble{position:relative;border-radius:18px;min-height:123px;padding:18px 13px;gap:9px;background:color-mix(in srgb,var(--node-color) 4%,var(--surface));border-color:color-mix(in srgb,var(--node-color) 32%,var(--line));box-shadow:0 3px 10px color-mix(in srgb,var(--text) 3%,transparent)}
+.map-bubble::before{content:'';position:absolute;top:0;left:calc(50% - 15px);height:2px;width:30px;background:var(--node-color);border-radius:2px;opacity:.65}
+.map-bubble:hover,.map-bubble:focus-visible,.map-bubble.selected{transform:translateY(-2px);box-shadow:0 0 0 3px color-mix(in srgb,var(--node-color) 7%,transparent),0 8px 22px color-mix(in srgb,var(--node-color) 8%,transparent)}
+.bubble-symbol{font-size:15px;line-height:1;opacity:.8}
+.bubble-title{font-size:14px;line-height:1.5;font-weight:600}
+.bubble-caption{font:11px/1.5 Arial,Helvetica,sans-serif;color:var(--muted);max-width:145px}
+.map-wires path{opacity:.38;stroke-width:1.3}.map-wires path.selected{opacity:.95;stroke-width:2}
+.map-wires .map-signal{opacity:0}.motion-on .map-signal{opacity:.65}
+.map-instructions{position:relative;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:15px 18px;border-top:1px solid var(--line);min-height:61px;background:var(--soft);border-radius:0 0 16px 16px}
+.map-instructions p{font-size:13px;line-height:1.7;color:var(--text)}
+.map-instructions button{padding:7px 11px;min-height:38px;border:1px solid var(--control-border);border-radius:7px;background:var(--surface);font-size:12px;color:var(--accent)}
+.map-detail{border-radius:12px;max-height:none;overflow:visible;min-height:0;border-top-width:2px;padding:26px}
+.map-detail h2{font-size:29px;line-height:1.25}.map-detail>.eyebrow{letter-spacing:.8px}
+.map-entry-list button{border-color:var(--line);background:var(--surface);font-size:14px;padding:12px;border-radius:8px}
+.map-entry-list button:hover{border-color:var(--detail-color)}
+.map-tooltip{border-radius:10px;font-size:13px;line-height:1.7;width:230px;box-shadow:0 8px 25px #0002}
+.map-breadcrumb{padding-block:7px;min-height:55px}.map-breadcrumb button{color:var(--text)}
+@media(min-width:1450px){.map-layout{grid-template-columns:minmax(0,1fr) 340px}}
+@media(max-width:1200px){.map-layout{grid-template-columns:1fr}.map-canvas{height:610px;min-height:610px}.map-detail{max-height:none}.map-entry-list{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){.map-node-position{width:152px}.map-center{width:135px;height:135px}.bubble-title{font-size:13px}.map-canvas{height:650px;min-height:650px}.map-instructions{padding:14px 16px}.map-detail{padding:24px}}
+@media(max-width:540px){.map-canvas{height:700px;min-height:700px}.map-node-position{width:116px}.map-bubble{border-radius:16px;min-height:128px;padding:15px 8px;gap:8px}.bubble-title{font-size:12px;line-height:1.5}.bubble-caption{font-size:10px;line-height:1.5}.map-center{width:106px;height:106px;gap:8px}.map-center strong{font-size:25px}.map-center>span:last-child{font-size:9px;max-width:88px;line-height:1.5}.map-rings{width:170px;height:170px}.map-rings::before{inset:-34px}.map-node-position[data-level=branch][data-index="2"]{margin-top:-42px}.map-node-position[data-level=branch][data-index="3"]{margin-top:42px}.map-instructions{align-items:flex-start;flex-direction:column;gap:9px}.map-instructions p{font-size:13px}.map-instructions button{min-height:44px}.map-entry-list{grid-template-columns:1fr}.map-tooltip{width:180px;font-size:12px}.map-stage{border-radius:12px}.map-detail h2{font-size:26px}}
+@media(max-width:380px){.map-node-position{width:104px}.map-center{width:94px;height:100px}.map-center strong{font-size:23px}.map-center>span:last-child{font-size:8px;max-width:77px}.bubble-title{font-size:11.5px}.bubble-caption{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.map-bubble:hover,.map-bubble.selected{transform:none}}

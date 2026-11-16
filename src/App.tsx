@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import Drawing from './Drawing'
 import MindMap from './MindMap'
 import ReaderNavigation from './ReaderNavigation'
 import { categories, projects } from './projects'
@@ -15,6 +14,9 @@ import './Editorial.css'
 import './Controls.css'
 import './Focus.css'
 import './AlwaysVisible.css'
+import './MapRefinement.css'
+import './AmbientFlow.css'
+import './Portrait.css'
 
 const email = 's_pagad@live.concordia.ca'
 const github = 'https://github.com/hanishPagadala/'
@@ -49,7 +51,6 @@ function App() {
     return () => cancelAnimationFrame(frame)
   }, [visualize])
   const [category, setCategory] = useState<Category>('All projects')
-  const [angle, setAngle] = useState(26)
   const [copied, setCopied] = useState(false)
   useEffect(() => { document.documentElement.dataset.theme = theme; try { localStorage.setItem('hp-theme', theme) } catch { /* Theme works without storage. */ } }, [theme])
   useEffect(() => {
@@ -74,8 +75,8 @@ function App() {
     </div></header>
     {!visualize && <ReaderNavigation onSectionChange={setActiveSection} />}
     <main id="main">{visualize ? <MindMap /> : <>
-      <section className="hero shell" id="home"><div className="hero-copy"><p className="eyebrow"><span className="status-dot" /> COMPUTER ENGINEERING · CONCORDIA UNIVERSITY</p><h1>Hanish Pagadala<span className="hero-specialty">Code. Circuits. Systems.</span></h1><p className="intro">I’m a Computer Engineering student building across embedded systems, robotics, and software. I enjoy connecting the pieces—and making them work together.</p><div className="hero-actions"><a className="button primary" href="#projects">Explore my work <span aria-hidden="true">↓</span></a><a className="text-link" href="./resume.html" target="_blank" rel="noreferrer">View résumé <Arrow /></a></div><div className="hero-footnote"><span>HARDWARE × SOFTWARE</span><span>DIRECTOR OF PROJECTS / IEEE CONCORDIA</span></div></div>
-        <div className="hero-visual"><div className="visual-top"><span><span className="status-dot" /> DESIGN EXPLORER</span><span>FIG. 001</span></div><Drawing kind="wing" angle={angle} /><div className="visual-caption"><div><span className="eyebrow">OBLIQUE WING CONCEPT · IN DEVELOPMENT</span><p>A different angle on flight.</p></div><span className="angle-value">{angle}°</span></div><label className="sweep-control"><span>Explore wing sweep <span aria-hidden="true">↔</span></span><input type="range" min="0" max="45" value={angle} onChange={event => setAngle(Number(event.target.value))} aria-label="Illustrative wing sweep angle" /><span>0° — 45°</span></label><p className="visual-note">Interactive concept illustration · not a flight simulation</p></div>
+      <section className="hero shell" id="home"><div className="hero-copy"><p className="portfolio-label">Engineering Portfolio</p><p className="eyebrow"><span className="status-dot" /> COMPUTER ENGINEERING · CONCORDIA UNIVERSITY</p><h1>Hanish Pagadala<span className="hero-specialty">Code. Circuits. Systems.</span></h1><p className="intro">I’m a Computer Engineering student building across embedded systems, robotics, and software. I enjoy connecting the pieces—and making them work together.</p><div className="hero-actions"><a className="button primary" href="#projects">Explore my work <span aria-hidden="true">↓</span></a><a className="text-link" href="./resume.html" target="_blank" rel="noreferrer">View résumé <Arrow /></a></div><div className="hero-footnote"><span>HARDWARE × SOFTWARE</span><span>DIRECTOR OF PROJECTS / IEEE CONCORDIA</span></div></div>
+        <figure className="hero-portrait"><div className="portrait-image"><img src="./hanish-portrait.jpeg" alt="Portrait of Hanish Pagadala" width="2316" height="3088" fetchPriority="high" /><span className="portrait-corner portrait-corner-top" aria-hidden="true" /><span className="portrait-corner portrait-corner-bottom" aria-hidden="true" /></div><figcaption><span className="portrait-caption-mark" aria-hidden="true" /><div><strong>Hanish Pagadala</strong><span>Computer Engineering · Concordia University</span></div></figcaption></figure>
       </section>
       <div className="discipline-strip"><div className="shell"><span>EMBEDDED & ROBOTICS</span><i>+</i><span>AEROSPACE & PHOTONICS</span><i>+</i><span>SOFTWARE & DATA</span></div></div>
       <section className="section shell" id="projects"><div className="section-heading"><div><p className="eyebrow">01 / SELECTED WORK</p><h2>Three builds.<br />A closer look.</h2></div><p>Robotics, embedded control, and connected software.<br />Explore my role, the approach, and the outcome.</p></div>

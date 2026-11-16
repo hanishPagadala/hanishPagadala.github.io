@@ -26,14 +26,14 @@ const branches: Branch[] = [
   ] },
 ]
 const overviewPositions = [[26, 22], [74, 22], [17, 50], [83, 50], [28, 80], [72, 80]]
-const leafPositions = [[23, 20], [77, 20], [17, 72], [83, 72], [50, 88]]
+const leafPositions = [[24, 22], [76, 22], [18, 67], [82, 67], [50, 84]]
 const initialSummary = 'I’m Hanish—a Computer Engineering student connecting code, circuits, and people. Explore the branches to see the projects, experiences, and interests that shape my work.'
 
 export default function MindMap() {
   const [branchId, setBranchId] = useState<string | null>(null)
   const [entryId, setEntryId] = useState<string | null>(null)
   const [hovered, setHovered] = useState<string | null>(null)
-  const [motion, setMotion] = useState(() => false)
+  const [motion, setMotion] = useState(() => typeof matchMedia === 'undefined' || !matchMedia('(prefers-reduced-motion: reduce)').matches)
   const active = branches.find(branch => branch.id === branchId)
   const entry = active?.entries.find(item => item.id === entryId)
   const nodes = active ? active.entries : branches
@@ -49,17 +49,17 @@ export default function MindMap() {
   return <section className={`mindmap-page ${motion ? 'motion-on' : ''}`} id="visualize" aria-labelledby="mindmap-title">
     <div className="map-topbar"><div><p className="eyebrow">AN EXPLORABLE PORTRAIT</p><h1 id="mindmap-title">A few worlds. <em>One Hanish.</em></h1></div><div className="map-actions"><button onClick={() => setMotion(!motion)} aria-pressed={motion}>{motion ? 'Pause motion' : 'Enable motion'}</button><a href="#home">Back to portfolio <span aria-hidden="true">↗</span></a></div></div>
     <div className="map-breadcrumb"><button onClick={reset} aria-label="Show all mind map branches">Hanish</button>{active && <><span aria-hidden="true">/</span><button onClick={() => setEntryId(null)}>{active.title}</button></>}{entry && <><span aria-hidden="true">/</span><span>{entry.title}</span></>}</div>
-    <div className="map-layout"><div className="map-canvas" role="group" aria-label={active ? `${active.title}: select a bubble to explore` : 'Hanish at the center of six connected branches'} style={{ '--branch-color': active?.color || 'var(--accent)' } as CSSProperties}>
+    <div className="map-layout"><div className="map-stage"><div className="map-canvas" role="group" aria-label={active ? `${active.title}: select a bubble to explore` : 'Hanish at the center of six connected branches'} style={{ '--branch-color': active?.color || 'var(--accent)' } as CSSProperties}>
+      <div className="map-flow" aria-hidden="true"><span /><span /></div>
       <div className="map-rings" aria-hidden="true" />
-      <svg className="map-wires" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">{nodes.map((node, i) => { const [x, y] = positions[i]; const selected = entryId === node.id || hovered === node.id; return <g key={`${active?.id || 'root'}-${node.id}`} style={{ '--wire': active?.color || branches[i].color, '--wire-delay': `${i * -.7}s` } as CSSProperties}><path d={`M50 50 Q${x} 50 ${x} ${y}`} className={selected ? 'selected' : ''} /><path d={`M50 50 Q${x} 50 ${x} ${y}`} className="map-signal" /></g> })}</svg>
-      <button className="map-center" onClick={reset} aria-label="Hanish: return to all branches"><span className="center-orbit" aria-hidden="true" /><span className="center-monogram">HP</span><strong>Hanish</strong><span>{active ? active.short : 'CODE · CIRCUITS · CURIOSITY'}</span></button>
+      <svg className="map-wires" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">{nodes.map((node, i) => { const [x, y] = positions[i]; const selected = entryId === node.id || hovered === node.id; return <g key={`${active?.id || 'root'}-${node.id}`} style={{ '--wire': active?.color || branches[i].color, '--wire-delay': `${i * -.7}s` } as CSSProperties}><path d={`M50 50 C50 ${y} ${x} 50 ${x} ${y}`} className={selected ? 'selected' : ''} /><path d={`M50 50 C50 ${y} ${x} 50 ${x} ${y}`} className="map-signal" /></g> })}</svg>
+      <button className="map-center" onClick={reset} aria-label="Hanish: return to all branches"><span className="center-orbit" aria-hidden="true" /><strong>Hanish</strong><span>{active ? active.short : 'CODE · CIRCUITS · CURIOSITY'}</span></button>
       {nodes.map((node, i) => { const [x, y] = positions[i]; const isBranch = 'entries' in node; const selected = entryId === node.id; const showTooltip = hovered === node.id; return <div className={`map-node-position ${y > 60 ? 'lower-node' : ''}`} key={`${active?.id || 'root'}-${node.id}`} data-level={active ? 'leaf' : 'branch'} data-index={i} style={{ left: `${x}%`, top: `${y}%`, '--node-color': active?.color || (node as Branch).color, '--delay': `${i * 65}ms` } as CSSProperties}>
         <button className={`map-bubble ${selected ? 'selected' : ''} ${isBranch ? 'branch-bubble' : 'leaf-bubble'}`} aria-expanded={isBranch ? false : undefined} aria-pressed={!isBranch ? selected : undefined} aria-controls="map-detail" aria-describedby={showTooltip ? 'map-hover-summary' : undefined} onMouseEnter={() => setHovered(node.id)} onMouseLeave={() => setHovered(null)} onFocus={() => setHovered(node.id)} onBlur={() => setHovered(null)} onClick={() => { setHovered(null); if (isBranch) { setBranchId(node.id); setEntryId(null) } else setEntryId(node.id) }}>
-          <span className="bubble-symbol" aria-hidden="true">{isBranch ? (node as Branch).symbol : String(i + 1).padStart(2, '0')}</span><span className="bubble-title">{node.title}</span><span className="bubble-caption">{isBranch ? `${(node as Branch).entries.length} ${node.id === 'passions' ? 'interests' : node.id === 'experience' ? 'chapters' : 'projects'} · explore +` : (node as Entry).status || 'Explore interest +'}</span>
+          <span className="bubble-symbol" aria-hidden="true">{isBranch ? (node as Branch).symbol : '↗'}</span><span className="bubble-title">{node.title}</span><span className="bubble-caption">{isBranch ? `${(node as Branch).entries.length} ${node.id === 'passions' ? 'interests' : node.id === 'experience' ? 'chapters' : 'projects'}` : (node as Entry).status || 'Explore interest'}</span>
         </button>{showTooltip && <div className="map-tooltip" id="map-hover-summary" role="tooltip">{node.summary}</div>}
       </div> })}
-      <div className="map-canvas-caption"><span className="status-dot" />{active ? 'Select a satellite · Hanish returns to the full map' : 'Hover to discover · Select to explore'}</div>
-    </div>
+      </div><div className="map-instructions"><p><span className="status-dot" />{active ? 'Select a satellite to read more.' : 'Hover for a summary. Select a branch to explore.'}</p>{active && <button onClick={reset}>← Back to all branches</button>}</div></div>
     <aside className="map-detail" id="map-detail" aria-live="polite" aria-atomic="true" style={{ '--detail-color': active?.color || 'var(--accent)' } as CSSProperties}>
       <p className="eyebrow">{entry ? 'A CLOSER LOOK' : active ? 'CONNECTED BY CURIOSITY' : 'MEET THE PERSON'}</p><h2>{entry?.title || active?.title || 'More than a project list.'}</h2>{entry?.status && <span className="map-detail-status">{entry.status}</span>}<p>{entry?.summary || active?.summary || initialSummary}</p>
       {entry ? <ul className="map-detail-list">{entry.detail.map(item => <li key={item}>{item}</li>)}</ul> : active ? <div className="map-entry-list">{active.entries.map(item => <button key={item.id} onClick={() => { setEntryId(item.id); setHovered(null) }}><span>{item.title}</span><span aria-hidden="true">↗</span></button>)}</div> : <div className="map-welcome"><p className="eyebrow">WHERE IT STARTED → WHERE IT’S GOING</p><p>Game development → Computer Engineering → multidisciplinary projects, leadership, and new explorations.</p><p className="eyebrow">OUTSIDE THE WORKBENCH</p><p>Space, cars, building PCs, cooking, travel, tennis, and volleyball.</p><button className="map-explore-button" onClick={() => setBranchId('experience')}>Explore my story <span aria-hidden="true">↗</span></button></div>}

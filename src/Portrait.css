@@ -1,0 +1,24 @@
+.hero-portrait{position:relative;margin:0;justify-self:end;width:100%;max-width:430px;padding:12px;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 40px color-mix(in srgb,var(--text) 6%,transparent)}
+.hero-portrait::before{content:'';position:absolute;inset:20px -13px -13px 20px;border:1px solid color-mix(in srgb,var(--accent) 25%,var(--line));border-radius:18px;z-index:-1;pointer-events:none}
+.portrait-image{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:10px;background:var(--soft)}
+.portrait-image img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 63%;transform:scale(1.13);transition:transform .8s var(--ease-out)}
+.hero-portrait:hover .portrait-image img{transform:scale(1.16)}
+.portrait-corner{position:absolute;width:25px;height:25px;pointer-events:none;border-color:color-mix(in srgb,var(--surface) 80%,transparent);border-style:solid}
+.portrait-corner-top{top:14px;left:14px;border-width:1px 0 0 1px}.portrait-corner-bottom{bottom:14px;right:14px;border-width:0 1px 1px 0}
+.hero-portrait figcaption{display:flex;align-items:center;gap:13px;padding:18px 6px 7px}
+.portrait-caption-mark{width:4px;height:33px;border-radius:3px;background:var(--accent);flex-shrink:0}
+.hero-portrait figcaption strong{display:block;font-size:15px;font-weight:600;line-height:1.6}
+.hero-portrait figcaption div>span{display:block;font-size:12px;color:var(--muted);line-height:1.8;margin-top:1px}
+@media(max-width:1050px){.hero-portrait{max-width:380px}.portrait-image{aspect-ratio:4/5}}
+@media(max-width:760px){.hero-portrait{justify-self:center;max-width:400px;width:calc(100% - 12px)}.portrait-image{aspect-ratio:5/6}.hero-portrait figcaption{padding-top:16px}.hero-portrait figcaption div>span{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.portrait-image img{transition:none}.hero-portrait:hover .portrait-image img{transform:scale(1.13)}}
+/* Bring the portrait into the introduction instead of pinning it to the far edge. */
+.hero{grid-template-columns:minmax(0,560px) minmax(0,430px);justify-content:start;column-gap:48px}
+.hero-portrait{justify-self:start}
+.portfolio-label{display:inline-block;margin-bottom:17px;padding:5px 10px;border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));border-radius:5px;background:var(--control-tint);color:var(--accent);font-size:12px;font-weight:600;letter-spacing:.8px;line-height:1.6;text-transform:uppercase}
+@media(min-width:1500px){.hero{column-gap:56px}}
+@media(max-width:1050px){.hero{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);column-gap:30px}}
+@media(max-width:760px){.hero{grid-template-columns:1fr;gap:36px}.hero-portrait{justify-self:center}.portfolio-label{font-size:11px;margin-bottom:15px}}
+/* Use a little more of the available width without returning to the far edge. */
+@media(min-width:1051px){.hero{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);column-gap:64px}.hero-portrait{justify-self:center}}
+@media(min-width:1500px){.hero{column-gap:72px}}

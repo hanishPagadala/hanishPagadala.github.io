@@ -1,0 +1,14 @@
+/* Slow tonal drift behind the diagram; no particles, flashing, or pointer tracking. */
+.map-flow{position:absolute;inset:0;z-index:-2;overflow:hidden;border-radius:inherit;pointer-events:none;user-select:none}
+.map-flow>span{position:absolute;width:115%;height:115%;left:-10%;top:-8%;opacity:.065;background:radial-gradient(ellipse at 28% 42%,var(--accent),transparent 58%);transform:translate(-5%,-3%) scale(1.02)}
+.map-flow>span+span{left:8%;top:9%;opacity:.055;background:radial-gradient(ellipse at 66% 64%,var(--teal),transparent 57%);transform:translate(3%,2%) scale(1.06)}
+.motion-on .map-flow>span{animation:ambientIndigo 32s ease-in-out infinite alternate}
+.motion-on .map-flow>span+span{animation:ambientTeal 38s ease-in-out infinite alternate;animation-delay:-12s}
+:root[data-theme=dark] .map-flow>span{opacity:.055}
+:root[data-theme=dark] .map-flow>span+span{opacity:.045}
+/* Let the background carry continuous motion while the diagram stays steady. */
+.motion-on .map-signal{animation:none;opacity:0}
+.motion-on .center-orbit{animation:none}
+@keyframes ambientIndigo{0%{transform:translate(-5%,-3%) scale(1.02)}100%{transform:translate(8%,6%) scale(1.12)}}
+@keyframes ambientTeal{0%{transform:translate(3%,2%) scale(1.06)}100%{transform:translate(-7%,-5%) scale(1.13)}}
+@media(prefers-reduced-motion:reduce){.map-flow>span{animation:none!important}}
