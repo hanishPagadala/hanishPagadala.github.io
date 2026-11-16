@@ -7,3 +7,18 @@
 @media(prefers-reduced-motion:reduce){.tour-invite,.tour-card{animation:none}.tour-invite button,.tour-card button{transition:none;transform:none!important}}
 html[data-reduce-motion=true] .tour-invite,html[data-reduce-motion=true] .tour-card{animation:none}html[data-reduce-motion=true] .tour-card button,html[data-reduce-motion=true] .tour-invite button{transition:none;transform:none!important}html[data-high-contrast=true] .tour-card,html[data-high-contrast=true] .tour-invite{background:Canvas;color:CanvasText;border:2px solid CanvasText}
 
+/* A quiet pause between stops lets the page arrive before the explanation. */
+.tour-invite{animation:tour-arrive .85s cubic-bezier(.22,1,.36,1) both}
+.tour-card{animation:none;opacity:1;transform:translateY(0) scale(1);transition:opacity .45s ease,transform .65s cubic-bezier(.22,1,.36,1);will-change:opacity,transform}
+.tour-dialog[data-phase=travel] .tour-card,.tour-dialog[data-phase=leaving] .tour-card{opacity:0;transform:translateY(12px) scale(.985);pointer-events:none}
+.tour-shade{animation:tour-veil .75s ease both;transition:opacity .38s ease}
+.tour-dialog[data-phase=leaving] .tour-shade{opacity:0}
+.tour-shade rect[x]{transition:none}
+.tour-outline{stroke-width:1.5;filter:drop-shadow(0 0 5px #aaa1ff55)}
+.tour-progress{height:3px;background:var(--line);border-radius:10px;overflow:hidden;margin-top:22px}.tour-progress>span{display:block;height:100%;background:var(--accent);border-radius:inherit;transition:width .85s cubic-bezier(.22,1,.36,1)}
+.tour-card button,.tour-invite button{transition:transform .35s cubic-bezier(.22,1,.36,1),background-color .3s,box-shadow .3s}
+.tour-card button:active,.tour-invite button:active{transform:translateY(0) scale(.97)}
+@keyframes tour-veil{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.tour-card,.tour-shade,.tour-shade rect[x],.tour-progress>span,.tour-invite{animation:none;transition:none;transform:none}}
+html[data-reduce-motion=true] .tour-card,html[data-reduce-motion=true] .tour-shade,html[data-reduce-motion=true] .tour-shade rect[x],html[data-reduce-motion=true] .tour-progress>span,html[data-reduce-motion=true] .tour-invite{animation:none;transition:none;transform:none}
+
