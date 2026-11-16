@@ -16,6 +16,12 @@ export default function AmbientBackground() {
     preference.addEventListener('change', stop)
     return () => preference.removeEventListener('change', stop)
   }, [])
+  useEffect(() => {
+    const pauseHiddenTab = () => { document.documentElement.dataset.pageHidden = String(document.hidden) }
+    pauseHiddenTab()
+    document.addEventListener('visibilitychange', pauseHiddenTab)
+    return () => document.removeEventListener('visibilitychange', pauseHiddenTab)
+  }, [])
   function toggle() {
     const next = !moving
     setMoving(next)

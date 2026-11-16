@@ -117,3 +117,6 @@ html[data-reduce-motion=true] .reset-preferences:hover{translate:none}
 .text-size-choice:has(input:focus-visible){outline:3px solid var(--accent);outline-offset:3px}
 html[data-large-text=true] .text-size-options{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(prefers-reduced-motion:reduce){.text-size-tile{transition:none}}
+
+/* Keep decorative animations dormant while this tab is hidden. */
+html[data-page-hidden=true] *,html[data-page-hidden=true] *::before,html[data-page-hidden=true] *::after{animation-play-state:paused!important}

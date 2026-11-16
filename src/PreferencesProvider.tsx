@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import type { ReactNode } from 'react'
 import { defaultPreferences, PreferencesContext } from './preferences-context'
 import type { Preferences } from './preferences-context'
@@ -24,5 +24,8 @@ export default function PreferencesProvider({ children }: { children: ReactNode 
     try { localStorage.setItem('hp-preferences-v1', JSON.stringify(preferences)) } catch { /* Preferences still apply for this visit. */ }
     window.dispatchEvent(new Event('portfolio-preferences'))
   }, [preferences])
-  return <PreferencesContext.Provider value={{ preferences, update: changes => setPreferences(previous => ({ ...previous, ...changes })), reset: () => setPreferences(previous => ({ ...defaultPreferences, language: previous.language })) }}>{children}</PreferencesContext.Provider>
+  const update = useCallback((changes: Partial<Preferences>) => setPreferences(previous => ({ ...previous, ...changes })), [])
+  const reset = useCallback(() => setPreferences(previous => ({ ...defaultPreferences, language: previous.language })), [])
+  const value = useMemo(() => ({ preferences, update, reset }), [preferences, update, reset])
+  return <PreferencesContext.Provider value={value}>{children}</PreferencesContext.Provider>
 }
