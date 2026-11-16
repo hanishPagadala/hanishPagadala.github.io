@@ -11,6 +11,7 @@ import './Polish.css'
 import './ProjectMotion.css'
 import './InlineDetails.css'
 import './Editorial.css'
+import './Controls.css'
 
 const email = 's_pagad@live.concordia.ca'
 const github = 'https://github.com/hanishPagadala/'

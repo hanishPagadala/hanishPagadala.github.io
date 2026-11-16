@@ -54,3 +54,9 @@ Project details expand inline with smooth height transitions. Cards align indepe
 
 Design references reviewed: https://brittanychiang.com/ (content hierarchy), https://rauno.me/ (interaction craft and restraint), and https://bruno-simon.com/ (personal exploration). Adaptations include active section navigation, reading progress, suggested project entry points with inline detail navigation, sticky category labels, editorial type hierarchy, and an invitation into the existing mind map. No reference-site assets or code were copied.
 
+
+Control visibility: Controls.css gives the résumé a prominent secondary action, makes suggested projects clearly clickable, strengthens filter borders and selected states, increases touch targets, and applies consistent focus/hover cues in both themes.
+
+
+Resume presentation now follows the supplied ARA Robotics reference: centered name/contact line, uppercase section headings with thin blue rules, right-aligned dates, and concise bullets. It uses selected projects plus a WIP summary; the complete collection remains on the portfolio. Only the approved email and public social links appear. Visible controls use reduced padding while retaining clear borders and touch target sizing.
+
