@@ -1,3 +1,4 @@
+global.requestAnimationFrame = () => 0
 const fs = require('node:fs')
 const path = require('node:path')
 const ts = require('typescript')
@@ -17,13 +18,13 @@ function load(file) {
   const module = { exports: {} }
   cache.set(resolved, module)
   const js = ts.transpileModule(fs.readFileSync(resolved, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX, target: ts.ScriptTarget.ES2022 } }).outputText
-  const localRequire = name => name === 'react' ? hooks : name.endsWith('.css') ? {} : name.startsWith('.') ? load(path.resolve(path.dirname(resolved), name + '.ts')) : require(name)
+  const localRequire = name => name === './preferences-context' ? { usePreferences: () => ({ preferences: { reduceMotion: false, language: 'en' } }) } : name === 'react' ? hooks : name.endsWith('.css') ? {} : name.startsWith('.') ? load(path.resolve(path.dirname(resolved), name + (fs.existsSync(path.resolve(path.dirname(resolved), name + '.tsx')) ? '.tsx' : '.ts'))) : require(name)
   new Function('require', 'module', 'exports', js)(localRequire, module, module.exports)
   return module.exports
 }
 const MindMapComponent = load('src/MindMap.tsx').default
 const assert = (condition, message) => { if (!condition) throw new Error(message) }
-function render() { cursor = 0; return MindMapComponent() }
+function render() { cursor = 0; return MindMapComponent().props.children }
 function walk(element, predicate, output = []) {
   if (!element || typeof element !== 'object') return output
   if (Array.isArray(element)) { element.forEach(child => walk(child, predicate, output)); return output }
@@ -60,3 +61,12 @@ assert(!tree.props.className.includes('motion-on'), 'Pause motion must stop anim
 const html = renderToStaticMarkup(tree)
 assert(!/chess|hand tracking/i.test(html), 'Excluded projects must stay absent')
 console.log('Passed mind-map interactions: six branches, hover summaries, project drill-down, WIP details, reset, five hobbies, hobby detail, and pause motion.')
+find(tree, 'Enable motion').props.onClick()
+tree = render()
+const canvas = walk(tree, element => element.props?.className === 'map-canvas')[0]
+canvas.props.onClick({ detail: 1, clientX: 250, clientY: 100, currentTarget: { getBoundingClientRect: () => ({ left: 0, top: 0, width: 500, height: 400 }) }, target: { closest: () => null } })
+tree = render()
+const respondedCanvas = walk(tree, element => element.props?.className === 'map-canvas')[0]
+assert(respondedCanvas.props.style['--response-x'] === '50%' && respondedCanvas.props.style['--response-y'] === '25%', 'Click response must use canvas-relative coordinates')
+assert(renderToStaticMarkup(tree).includes('map-response-ripple'), 'Click ripple must render when motion is enabled')
+console.log('Passed map click response coordinates and ripple rendering.')

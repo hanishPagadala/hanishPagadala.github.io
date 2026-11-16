@@ -1,5 +1,8 @@
+import AccessibilityControls from './AccessibilityControls'
+import Localize from './Localize'
 import { useEffect, useState } from 'react'
 import MindMap from './MindMap'
+import AmbientBackground from './AmbientBackground'
 import ReaderNavigation from './ReaderNavigation'
 import { categories, projects } from './projects'
 import { caseStudies, featuredIds } from './caseStudies'
@@ -17,6 +20,8 @@ import './AlwaysVisible.css'
 import './MapRefinement.css'
 import './AmbientFlow.css'
 import './Portrait.css'
+import './Accessibility.css'
+import './MapResponse.css'
 
 const email = 's_pagad@live.concordia.ca'
 const github = 'https://github.com/hanishPagadala/'
@@ -25,14 +30,14 @@ function Arrow() { return <span aria-hidden="true">↗</span> }
 
 function ProjectCard({ project }: { project: Project }) {
   const story = caseStudies[project.id]
-  return <article className={`project-card project-${project.id}`} id={`project-${project.id}`}>
+  return <Localize><article className={`project-card project-${project.id}`} id={`project-${project.id}`}>
     <div className="project-body">
       {project.ongoing && <p className="project-status ongoing"><span className="status-dot" />Work in progress</p>}
       <h3>{project.title}</h3><p className="project-context">{project.context}</p><p>{project.description}</p>
       <ul className="tags" aria-label="Project technologies">{project.tags.slice(0, 3).map(tag => <li key={tag}>{tag}</li>)}</ul>
       <details className="project-inline"><summary>{story ? 'Read the engineering story' : 'Contributions & details'} <span aria-hidden="true">+</span></summary><div className="project-details">{story ? <><dl className="case-study"><div><dt>The problem</dt><dd>{story.problem}</dd></div><div><dt>My responsibility</dt><dd>{story.responsibility}</dd></div><div><dt>The approach</dt><dd>{story.approach}</dd></div><div><dt>The outcome</dt><dd>{story.outcome}</dd></div></dl>{story.link && <a className="evidence-link" href={story.link.href} target="_blank" rel="noreferrer">{story.link.label}<span aria-hidden="true">↗</span></a>}</> : <ul>{project.contributions.map(item => <li key={item}>{item}</li>)}</ul>}</div></details>
     </div>
-  </article>
+  </article></Localize>
 }
 
 function App() {
@@ -66,12 +71,13 @@ function App() {
   async function copyEmail() {
     try { await navigator.clipboard.writeText(email); setCopied(true) } catch { window.location.href = `mailto:${email}` }
   }
-  return <>
-    <a className="skip-link" href="#main">Skip to content</a>
+  return <Localize><>
+    <AmbientBackground />
+    <a className="skip-link" href={visualize ? "#visualize" : "#main"}>Skip to content</a>
     <header className="site-header"><div className="shell header-inner">
       <a href="#home" className="wordmark" aria-label="Hanish Pagadala home">h<span>p</span><i>.</i></a>
       <nav id="mobile-navigation" aria-label="Main navigation" className={menu ? 'nav open' : 'nav'}>{[['Projects', '#projects'], ['Experience', '#experience'], ['About', '#about'], ['Visualize', '#visualize']].map(([label, href]) => <a key={href} href={href} aria-current={visualize && href === '#visualize' ? 'page' : !visualize && href === '#' + activeSection ? 'location' : undefined} onClick={() => setMenu(false)}>{label}</a>)}<a href="#contact" className="nav-contact" onClick={() => setMenu(false)}>Let’s connect <Arrow /></a></nav>
-      <div className="header-actions"><button className="theme-button" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}>{theme === 'light' ? '☾' : '☀'}</button><button className="menu-button" aria-label="Toggle navigation" aria-expanded={menu} aria-controls="mobile-navigation" onClick={() => setMenu(!menu)}>{menu ? 'Close' : 'Menu'}</button></div>
+      <div className="header-actions"><button className="theme-button" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}><span className="theme-symbol" key={theme} aria-hidden="true">{theme === 'light' ? '☾' : '☀'}</span></button><AccessibilityControls /><button className="menu-button" aria-label="Toggle navigation" aria-expanded={menu} aria-controls="mobile-navigation" onClick={() => setMenu(!menu)}>{menu ? 'Close' : 'Menu'}</button></div>
     </div></header>
     {!visualize && <ReaderNavigation onSectionChange={setActiveSection} />}
     <main id="main">{visualize ? <MindMap /> : <>
@@ -82,7 +88,7 @@ function App() {
       <section className="section shell" id="projects"><div className="section-heading"><div><p className="eyebrow">01 / SELECTED WORK</p><h2>Three builds.<br />A closer look.</h2></div><p>Robotics, embedded control, and connected software.<br />Explore my role, the approach, and the outcome.</p></div>
         <div className="featured-projects" aria-label="Featured engineering projects">{featured.map(project => <ProjectCard project={project} key={project.id} />)}</div>
         <section className="ongoing-work" aria-labelledby="ongoing-heading"><div className="subsection-heading"><div><p className="eyebrow">ON THE WORKBENCH</p><h3 id="ongoing-heading">Currently building</h3></div><p>Ongoing exploration, with implementation and testing still in development.</p></div><div className="ongoing-grid">{ongoing.map(project => <ProjectCard project={project} key={project.id} />)}</div></section>
-        <section className="project-archive" aria-labelledby="additional-projects-heading"><div className="archive-heading"><p className="eyebrow">MORE TO EXPLORE</p><h3 id="additional-projects-heading">More projects & experiments</h3></div><div className="archive-body"><p className="archive-intro">Academic work, hackathon prototypes, and personal demonstrations across software, hardware, and data.</p><div className="filters" role="group" aria-label="Filter additional projects">{archiveCategories.map(item => <button key={item} aria-pressed={category === item} onClick={() => setCategory(item)}>{item}</button>)}</div><p className="archive-count" role="status">{filtered.length} additional {filtered.length === 1 ? 'project' : 'projects'}</p><div className="projects-grid additional-grid" key={category}>{filtered.map(project => <ProjectCard project={project} key={project.id} />)}</div></div></section>
+        <section className="project-archive" aria-labelledby="additional-projects-heading"><div className="archive-heading"><p className="eyebrow">MORE TO EXPLORE</p><h3 id="additional-projects-heading">More projects & experiments</h3></div><div className="archive-body"><p className="archive-intro">Academic work, hackathon prototypes, and personal demonstrations across software, hardware, and data.</p><div className="filters" role="group" aria-label="Filter additional projects">{archiveCategories.map(item => <button key={item} aria-pressed={category === item} onClick={() => setCategory(item)}>{item}</button>)}</div><p className="archive-count" role="status">{`${filtered.length} additional ${filtered.length === 1 ? 'project' : 'projects'}`}</p><div className="projects-grid additional-grid" key={category}>{filtered.map(project => <ProjectCard project={project} key={project.id} />)}</div></div></section>
       </section>
 
       <section className="experience-section" id="experience"><div className="section shell"><div className="section-heading"><div><p className="eyebrow">02 / EXPERIENCE</p><h2>Engineering, with people.</h2></div><p>Building systems also means connecting teams,<br />understanding workflows, and keeping work moving.</p></div>
@@ -97,6 +103,6 @@ function App() {
       <section className="shell resume-section" id="resume"><div><p className="eyebrow">THE DETAILS, IN ONE PLACE</p><h2>A concise look at my experience.</h2><p>View my experience and selected projects in a concise résumé, ready to print or save as PDF.</p></div><a className="button primary" href="./resume.html" target="_blank" rel="noreferrer">View résumé <Arrow /></a></section>
       <section className="contact-section" id="contact"><div className="shell contact-inner"><p className="eyebrow">04 / LET’S CONNECT</p><h2>Good engineering<br />starts with a <em>conversation.</em></h2><p>Let’s talk embedded systems, robotics, software, or the next interesting problem.</p><div className="email-row"><a className="email-link" href={`mailto:${email}`}>{email} <Arrow /></a><button onClick={copyEmail} aria-label="Copy email address">{copied ? 'Copied ✓' : 'Copy email'}</button><span className="sr-only" role="status">{copied ? 'Email address copied.' : ''}</span></div><div className="contact-links"><a href={github} target="_blank" rel="noreferrer">GitHub <Arrow /></a><a href={linkedin} target="_blank" rel="noreferrer">LinkedIn <Arrow /></a></div></div></section>
     </>}</main>{!visualize && <footer className="shell footer"><a className="footer-name" href="#home">Hanish Pagadala<span>Computer Engineering</span></a><p>Thoughtfully designed. Always evolving.</p><a href="#home">Back to top ↑</a></footer>}
-  </>
+  </></Localize>
 }
 export default App

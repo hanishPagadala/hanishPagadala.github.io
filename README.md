@@ -75,3 +75,20 @@ Mind-map ambient background: low-opacity indigo/teal radial fields drift over 32
 
 The hero now uses the supplied portrait (public/hanish-portrait.jpeg) in a responsive frame. The original photo is unchanged; CSS handles composition and a gentle hover zoom. The aircraft illustration and sweep control have been removed from the introduction. The standalone preview embeds the portrait so it opens without a separate image file.
 
+
+Site-wide ambient backdrop: a stationary indigo/teal wash with five low-opacity geometric marks drifting over 29–46 seconds. The background motion control remembers the visitor preference. Reduced-motion keeps the shapes still, and mobile shows only two marks. Visualize retains its own separate background control.
+
+
+## Languages and reading preferences
+
+The header includes an EN/FR language switch, the theme button, and a gear disclosure for reading preferences. English/French localization is handled through React, including project narratives, the map, accessible labels, and the résumé route. The document language and title follow the selected language. Technical names and product names remain unchanged. Both résumé versions offer language links.
+
+The gear offers text sizes from 100% to 200%, high contrast, reduced motion, expanded text spacing, underlined links, and a simplified map. Larger text or expanded spacing automatically uses the stacked map layout. Preferences are stored only in localStorage on the visitor’s device; storage failure leaves controls usable for the current visit. Escape closes the preferences disclosure and returns focus to its summary. Native controls and persistent visible focus support keyboard navigation. External links announce their new-tab behavior. Browser zoom remains available.
+
+Run `node build-resume.cjs` and `node build-french-resume.cjs` when updating résumé content. Run `node check-accessibility.cjs` for localization/content and preference checks, alongside existing checks. Those tests do not establish WCAG conformance. Manual browser, keyboard, screen-reader, 200%/400% zoom, forced-colors, and combined-preference checks are still needed. French copy should receive human editorial review before final publication.
+
+The site-wide background now uses original isometric cube linework inspired by the supplied geometric reference, with a smooth 20-second alternating drift and soft diagonal light wash. No MKBHD logo, video, or branded assets are used. Motion follows the saved background pause preference and the accessibility/system settings; high contrast hides decorative geometry. The pattern also appears outside the mind-map canvas.
+
+
+Mind-map click response: a tonal atmospheric field shifts toward each click, with a bounded two-ring ripple behind the content. Keyboard activation uses the selected button’s center. Pause disables ripple/animated glow travel; reduced-motion suppresses ripples and transitions; high contrast hides decorative response layers. No pointer-move tracking, flashing, or external services are used.
+

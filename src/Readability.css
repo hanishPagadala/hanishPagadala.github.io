@@ -1,56 +1,56 @@
 /* Readable body copy and supporting labels across both portfolio views. */
-body{font-size:16px;line-height:1.6}
-.intro{font-size:18px;line-height:1.8;max-width:490px}
-.nav{font-size:15px}
-.eyebrow,.hero-copy>.eyebrow{font-size:11px;line-height:1.7;letter-spacing:1px}
-.button,.text-link{font-size:14px;line-height:1.6}
-.hero-footnote{font-size:10px;letter-spacing:1px}
-.section-heading>p{font-size:16px;line-height:1.8;max-width:420px}
-.project-body>p:not(.project-context){font-size:17px;line-height:1.8;max-width:48ch;min-height:0}
-.project-body .project-context{font-size:12px;line-height:1.7}
-.project-status{font-size:12px;line-height:1.7;letter-spacing:0}
-.project-body h3{font-size:25px;line-height:1.3}
-.project-details{font-size:16px;line-height:1.8}
+body{font-size:calc((16px) * var(--text-scale,1));line-height:1.6}
+.intro{font-size:calc((18px) * var(--text-scale,1));line-height:1.8;max-width:490px}
+.nav{font-size:calc((15px) * var(--text-scale,1))}
+.eyebrow,.hero-copy>.eyebrow{font-size:calc((11px) * var(--text-scale,1));line-height:1.7;letter-spacing:1px}
+.button,.text-link{font-size:calc((14px) * var(--text-scale,1));line-height:1.6}
+.hero-footnote{font-size:calc((10px) * var(--text-scale,1));letter-spacing:1px}
+.section-heading>p{font-size:calc((16px) * var(--text-scale,1));line-height:1.8;max-width:420px}
+.project-body>p:not(.project-context){font-size:calc((17px) * var(--text-scale,1));line-height:1.8;max-width:48ch;min-height:0}
+.project-body .project-context{font-size:calc((12px) * var(--text-scale,1));line-height:1.7}
+.project-status{font-size:calc((12px) * var(--text-scale,1));line-height:1.7;letter-spacing:0}
+.project-body h3{font-size:calc((25px) * var(--text-scale,1));line-height:1.3}
+.project-details{font-size:calc((16px) * var(--text-scale,1));line-height:1.8}
 .project-details li+li{margin-top:13px}
-summary{font-size:14px;padding-block:21px}
-.tags li{font-size:11px;line-height:1.6;padding:6px 9px}
-.filters button{font-size:13px;line-height:1.6;padding:11px 16px}
-.filter-bottom{font-size:12px;line-height:1.7;flex-wrap:wrap}
-.project-overview>span{font-size:12px;line-height:1.7}
-.group-heading>span,.project-number{font-size:11px}
-.experience-row p:not(.eyebrow){font-size:16px;line-height:1.85}
+summary{font-size:calc((14px) * var(--text-scale,1));padding-block:21px}
+.tags li{font-size:calc((11px) * var(--text-scale,1));line-height:1.6;padding:6px 9px}
+.filters button{font-size:calc((13px) * var(--text-scale,1));line-height:1.6;padding:11px 16px}
+.filter-bottom{font-size:calc((12px) * var(--text-scale,1));line-height:1.7;flex-wrap:wrap}
+.project-overview>span{font-size:calc((12px) * var(--text-scale,1));line-height:1.7}
+.group-heading>span,.project-number{font-size:calc((11px) * var(--text-scale,1))}
+.experience-row p:not(.eyebrow){font-size:calc((16px) * var(--text-scale,1));line-height:1.85}
 .experience-description{max-width:440px}
-.subtle{font-size:13px;line-height:1.8}
-.about-copy>p{font-size:17px;line-height:1.85}
-.about-copy .large-copy{font-size:25px;line-height:1.5}
+.subtle{font-size:calc((13px) * var(--text-scale,1));line-height:1.8}
+.about-copy>p{font-size:calc((17px) * var(--text-scale,1));line-height:1.85}
+.about-copy .large-copy{font-size:calc((25px) * var(--text-scale,1));line-height:1.5}
 .skill-row{grid-template-columns:110px 1fr;padding-block:19px}
-.skill-row h3{font-size:14px;line-height:1.7}
-.skill-row p{font-size:14px;line-height:1.8}
-.education-note>p:not(.eyebrow){font-size:17px}
-.resume-section p:not(.eyebrow){font-size:16px;line-height:1.8}
-.contact-inner>p:not(.eyebrow){font-size:17px;line-height:1.85;max-width:520px}
-.email-row button{font-size:12px;padding:11px 15px}
-.contact-links>a{font-size:16px}
-.footer-name{font-size:15px}.footer-name span,.footer p,.footer>a:last-child{font-size:12px;line-height:1.8}
-.sweep-control,.visual-top,.visual-caption .eyebrow,.visual-note{font-size:10px;line-height:1.6}
-.discipline-strip .shell{font-size:11px;line-height:1.8;letter-spacing:1px}
-.map-topbar .eyebrow,.map-detail>.eyebrow{font-size:11px;line-height:1.7}
-.map-actions{font-size:13px;line-height:1.6}.map-actions button{font-size:13px}
-.map-breadcrumb{font-size:12px;line-height:1.7;min-height:52px}
+.skill-row h3{font-size:calc((14px) * var(--text-scale,1));line-height:1.7}
+.skill-row p{font-size:calc((14px) * var(--text-scale,1));line-height:1.8}
+.education-note>p:not(.eyebrow){font-size:calc((17px) * var(--text-scale,1))}
+.resume-section p:not(.eyebrow){font-size:calc((16px) * var(--text-scale,1));line-height:1.8}
+.contact-inner>p:not(.eyebrow){font-size:calc((17px) * var(--text-scale,1));line-height:1.85;max-width:520px}
+.email-row button{font-size:calc((12px) * var(--text-scale,1));padding:11px 15px}
+.contact-links>a{font-size:calc((16px) * var(--text-scale,1))}
+.footer-name{font-size:calc((15px) * var(--text-scale,1))}.footer-name span,.footer p,.footer>a:last-child{font-size:calc((12px) * var(--text-scale,1));line-height:1.8}
+.sweep-control,.visual-top,.visual-caption .eyebrow,.visual-note{font-size:calc((10px) * var(--text-scale,1));line-height:1.6}
+.discipline-strip .shell{font-size:calc((11px) * var(--text-scale,1));line-height:1.8;letter-spacing:1px}
+.map-topbar .eyebrow,.map-detail>.eyebrow{font-size:calc((11px) * var(--text-scale,1));line-height:1.7}
+.map-actions{font-size:calc((13px) * var(--text-scale,1));line-height:1.6}.map-actions button{font-size:calc((13px) * var(--text-scale,1))}
+.map-breadcrumb{font-size:calc((12px) * var(--text-scale,1));line-height:1.7;min-height:52px}
 .map-layout{grid-template-columns:minmax(0,1fr) 340px}
 .map-detail{padding:28px 25px}
-.map-detail>p:not(.eyebrow),.map-welcome>p:not(.eyebrow),.map-detail-list{font-size:16px;line-height:1.8}
-.map-detail-status{font-size:12px;line-height:1.8}
-.map-welcome .eyebrow{font-size:10px;line-height:1.7}
-.map-entry-list button{font-size:14px;line-height:1.65;padding-block:15px}
-.map-reset,.map-explore-button{font-size:14px;line-height:1.7}
-.map-tooltip{font-size:14px;line-height:1.75;width:250px;padding:16px 18px}
-.bubble-title{font-size:14px;line-height:1.5}.bubble-caption{font-size:11px;line-height:1.5}
+.map-detail>p:not(.eyebrow),.map-welcome>p:not(.eyebrow),.map-detail-list{font-size:calc((16px) * var(--text-scale,1));line-height:1.8}
+.map-detail-status{font-size:calc((12px) * var(--text-scale,1));line-height:1.8}
+.map-welcome .eyebrow{font-size:calc((10px) * var(--text-scale,1));line-height:1.7}
+.map-entry-list button{font-size:calc((14px) * var(--text-scale,1));line-height:1.65;padding-block:15px}
+.map-reset,.map-explore-button{font-size:calc((14px) * var(--text-scale,1));line-height:1.7}
+.map-tooltip{font-size:calc((14px) * var(--text-scale,1));line-height:1.75;width:250px;padding:16px 18px}
+.bubble-title{font-size:calc((14px) * var(--text-scale,1));line-height:1.5}.bubble-caption{font-size:calc((11px) * var(--text-scale,1));line-height:1.5}
 .map-node-position{width:180px}.map-bubble{min-height:132px}
-.map-center>span:last-child{font-size:9px;letter-spacing:.3px;line-height:1.5}
-.map-canvas-caption{font-size:11px;line-height:1.7;bottom:12px}
-.map-footer{font-size:12px;line-height:1.8}
+.map-center>span:last-child{font-size:calc((9px) * var(--text-scale,1));letter-spacing:.3px;line-height:1.5}
+.map-canvas-caption{font-size:calc((11px) * var(--text-scale,1));line-height:1.7;bottom:12px}
+.map-footer{font-size:calc((12px) * var(--text-scale,1));line-height:1.8}
 @media(max-width:1200px){.map-layout{grid-template-columns:1fr}.map-canvas{height:680px;min-height:680px}.map-detail{max-height:none;min-height:0;overflow:visible}.map-entry-list{display:grid;grid-template-columns:1fr 1fr;column-gap:25px}.map-node-position{width:170px}.map-center{width:160px;height:160px}.map-tooltip{width:230px}}
-@media(max-width:760px){.section-heading>p{font-size:16px}.intro{font-size:17px}.hero-copy>.eyebrow{font-size:10px}.hero-footnote{font-size:10px}.project-body{padding:26px 24px 0}.project-body>p:not(.project-context),.about-copy>p{font-size:17px}.project-body h3{font-size:24px}.filters button{font-size:12px;padding:10px 13px}.project-overview>span{font-size:12px}.sweep-control{grid-template-columns:1fr auto;gap:8px}.sweep-control>span:first-child{grid-column:1/-1}.skill-row{grid-template-columns:95px 1fr;gap:12px}.contact-inner>p:not(.eyebrow){font-size:17px}.map-node-position{width:150px}.bubble-title{font-size:13px}.bubble-caption{font-size:11px}.map-bubble{min-height:130px}.map-tooltip{width:215px}.map-center>span:last-child{font-size:8px}.map-footer{font-size:11px}}
-@media(max-width:540px){.map-canvas{height:760px;min-height:760px}.map-node-position{width:118px}.map-bubble{min-height:138px;padding:13px 8px}.bubble-title{font-size:12px;line-height:1.5}.bubble-caption{font-size:10px;line-height:1.5}.map-center{width:110px;height:110px;gap:6px}.center-monogram{display:none}.map-center>span:last-child{font-size:8px;max-width:90px;line-height:1.5}.map-center strong{font-size:25px}.map-node-position[data-level="branch"][data-index="2"]{margin-top:-48px}.map-node-position[data-level="branch"][data-index="3"]{margin-top:48px}.map-tooltip{font-size:13px;width:190px}.map-entry-list{grid-template-columns:1fr}.map-breadcrumb{font-size:11px}.map-actions,.map-actions button{font-size:12px}.map-canvas-caption{font-size:10px}.map-detail>p:not(.eyebrow),.map-welcome>p:not(.eyebrow),.map-detail-list{font-size:16px}.discipline-strip .shell{font-size:10px}.visual-top{font-size:9px}.visual-caption .eyebrow{font-size:9px}}
-@media(max-width:380px){.map-node-position{width:106px}.bubble-title{font-size:12px}.bubble-caption{font-size:10px}.map-center{width:98px;height:108px}.map-center>span:last-child{font-size:8px;max-width:80px}.map-center strong{font-size:23px}.hero-copy>.eyebrow{font-size:10px}.project-body{padding-inline:20px}}
+@media(max-width:760px){.section-heading>p{font-size:calc((16px) * var(--text-scale,1))}.intro{font-size:calc((17px) * var(--text-scale,1))}.hero-copy>.eyebrow{font-size:calc((10px) * var(--text-scale,1))}.hero-footnote{font-size:calc((10px) * var(--text-scale,1))}.project-body{padding:26px 24px 0}.project-body>p:not(.project-context),.about-copy>p{font-size:calc((17px) * var(--text-scale,1))}.project-body h3{font-size:calc((24px) * var(--text-scale,1))}.filters button{font-size:calc((12px) * var(--text-scale,1));padding:10px 13px}.project-overview>span{font-size:calc((12px) * var(--text-scale,1))}.sweep-control{grid-template-columns:1fr auto;gap:8px}.sweep-control>span:first-child{grid-column:1/-1}.skill-row{grid-template-columns:95px 1fr;gap:12px}.contact-inner>p:not(.eyebrow){font-size:calc((17px) * var(--text-scale,1))}.map-node-position{width:150px}.bubble-title{font-size:calc((13px) * var(--text-scale,1))}.bubble-caption{font-size:calc((11px) * var(--text-scale,1))}.map-bubble{min-height:130px}.map-tooltip{width:215px}.map-center>span:last-child{font-size:calc((8px) * var(--text-scale,1))}.map-footer{font-size:calc((11px) * var(--text-scale,1))}}
+@media(max-width:540px){.map-canvas{height:760px;min-height:760px}.map-node-position{width:118px}.map-bubble{min-height:138px;padding:13px 8px}.bubble-title{font-size:calc((12px) * var(--text-scale,1));line-height:1.5}.bubble-caption{font-size:calc((10px) * var(--text-scale,1));line-height:1.5}.map-center{width:110px;height:110px;gap:6px}.center-monogram{display:none}.map-center>span:last-child{font-size:calc((8px) * var(--text-scale,1));max-width:90px;line-height:1.5}.map-center strong{font-size:calc((25px) * var(--text-scale,1))}.map-node-position[data-level="branch"][data-index="2"]{margin-top:-48px}.map-node-position[data-level="branch"][data-index="3"]{margin-top:48px}.map-tooltip{font-size:calc((13px) * var(--text-scale,1));width:190px}.map-entry-list{grid-template-columns:1fr}.map-breadcrumb{font-size:calc((11px) * var(--text-scale,1))}.map-actions,.map-actions button{font-size:calc((12px) * var(--text-scale,1))}.map-canvas-caption{font-size:calc((10px) * var(--text-scale,1))}.map-detail>p:not(.eyebrow),.map-welcome>p:not(.eyebrow),.map-detail-list{font-size:calc((16px) * var(--text-scale,1))}.discipline-strip .shell{font-size:calc((10px) * var(--text-scale,1))}.visual-top{font-size:calc((9px) * var(--text-scale,1))}.visual-caption .eyebrow{font-size:calc((9px) * var(--text-scale,1))}}
+@media(max-width:380px){.map-node-position{width:106px}.bubble-title{font-size:calc((12px) * var(--text-scale,1))}.bubble-caption{font-size:calc((10px) * var(--text-scale,1))}.map-center{width:98px;height:108px}.map-center>span:last-child{font-size:calc((8px) * var(--text-scale,1));max-width:80px}.map-center strong{font-size:calc((23px) * var(--text-scale,1))}.hero-copy>.eyebrow{font-size:calc((10px) * var(--text-scale,1))}.project-body{padding-inline:20px}}

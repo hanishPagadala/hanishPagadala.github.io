@@ -1,0 +1,35 @@
+/* A fixed, quiet backdrop. Only five small marks move, using transforms. */
+.site-ambience{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background:radial-gradient(ellipse at 8% 16%,color-mix(in srgb,var(--accent) 4%,transparent),transparent 48%),radial-gradient(ellipse at 91% 77%,color-mix(in srgb,var(--teal) 3%,transparent),transparent 45%),var(--bg)}
+body{isolation:isolate;background:transparent}
+.ambient-shape{position:absolute;display:block;pointer-events:none;color:var(--accent);opacity:.085;animation-play-state:paused!important}
+.site-ambience.is-moving .ambient-shape{animation-play-state:running!important}
+.shape-ring{width:68px;height:68px;border:1px solid currentColor;border-radius:50%;left:3%;top:20%;animation:ambientMarkDrift 35s ease-in-out infinite alternate}
+.shape-square{width:30px;height:30px;border:1px solid currentColor;border-radius:5px;right:4%;top:38%;rotate:28deg;animation:ambientMarkTurn 43s ease-in-out infinite alternate}
+.shape-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);left:8%;top:74%;opacity:.13;animation:ambientMarkDrift 29s ease-in-out infinite alternate-reverse}
+.shape-orbit{width:105px;height:105px;border:1px solid var(--teal);border-radius:50%;right:2%;top:81%;opacity:.065;animation:ambientMarkDrift 46s ease-in-out infinite alternate}
+.shape-line{width:35px;height:1px;background:currentColor;left:47%;top:9%;rotate:-35deg;animation:ambientMarkTurn 38s ease-in-out infinite alternate-reverse}
+.background-motion-toggle{position:fixed;bottom:16px;right:18px;z-index:18;display:flex;align-items:center;gap:8px;min-height:36px;padding:7px 11px;border:1px solid var(--line);border-radius:20px;background:var(--surface);color:var(--muted);font-size:calc((11px) * var(--text-scale,1));line-height:1.6;box-shadow:0 2px 10px color-mix(in srgb,var(--text) 4%,transparent)}
+.background-motion-toggle>span:first-child{font-size:calc((14px) * var(--text-scale,1));color:var(--accent)}
+.background-motion-toggle:hover{border-color:var(--control-border);color:var(--text)}
+.background-motion-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.hero,.section.shell,.explore-story,.resume-section{position:relative}
+@keyframes ambientMarkDrift{from{transform:translate(0,0)}to{transform:translate(16px,-28px)}}
+@keyframes ambientMarkTurn{from{transform:translate(0,0) rotate(0deg)}to{transform:translate(-14px,19px) rotate(22deg)}}
+@media(max-width:1000px){.shape-line{display:none}.shape-ring{left:1%;width:45px;height:45px}.shape-orbit{right:1%;width:65px;height:65px}}
+@media(max-width:760px){.shape-square,.shape-orbit{display:none}.shape-ring{opacity:.06}.shape-dot{opacity:.1}.background-motion-toggle{bottom:12px;right:12px;min-height:44px;padding:9px 12px;font-size:calc((10px) * var(--text-scale,1))}.footer{padding-bottom:78px}}
+@media(prefers-reduced-motion:reduce){.site-ambience .ambient-shape{animation:none!important}.background-motion-toggle{transition:none}}
+.footer{padding-bottom:75px}
+/* Original isometric geometry: a quiet technical texture with perceptible, continuous drift. */
+.geometric-ambience{background:radial-gradient(ellipse at 18% 12%,color-mix(in srgb,var(--accent) 4%,var(--bg)),transparent 65%),var(--bg)}
+.geometric-field{position:absolute;inset:-150px;opacity:.2;color:var(--accent);mask-image:linear-gradient(120deg,transparent 14%,#0003 48%,#000 95%);-webkit-mask-image:linear-gradient(120deg,transparent 14%,#0003 48%,#000 95%);animation:geometricDrift 20s ease-in-out infinite alternate;animation-play-state:paused;pointer-events:none}
+.geometric-grid{display:block;overflow:visible}.geometric-grid path{fill:none;stroke:currentColor;stroke-width:.85;stroke-linecap:round;stroke-linejoin:round}
+.geometric-wash{position:absolute;inset:-30%;background:linear-gradient(122deg,transparent 34%,color-mix(in srgb,var(--surface) 22%,transparent) 47%,transparent 58%);opacity:.65;animation:geometricLight 28s ease-in-out infinite alternate;animation-play-state:paused;pointer-events:none}
+.geometric-ambience.is-moving .geometric-field,.geometric-ambience.is-moving .geometric-wash{animation-play-state:running}
+:root[data-theme=dark] .geometric-field{opacity:.12}
+.mindmap-page{background:transparent}
+@keyframes geometricDrift{from{transform:translate3d(0,0,0)}to{transform:translate3d(120px,69.282px,0)}}
+@keyframes geometricLight{from{transform:translate3d(-3%,0,0)}to{transform:translate3d(5%,2%,0)}}
+@media(max-width:760px){.geometric-field{opacity:.17;animation-duration:26s}:root[data-theme=dark] .geometric-field{opacity:.1}}
+@media(prefers-reduced-motion:reduce){.geometric-field,.geometric-wash{animation:none!important}}
+html[data-reduce-motion=true] .geometric-field,html[data-reduce-motion=true] .geometric-wash{animation:none!important}
+html[data-high-contrast=true] .geometric-field,html[data-high-contrast=true] .geometric-wash{display:none}

@@ -3,11 +3,11 @@
 .project-card{align-self:start;height:auto}
 .project-body{min-height:390px}
 .project-body .project-inline{margin-top:auto;border-top:1px solid var(--line)}
-.project-inline summary{font-size:14px;font-weight:500;padding-block:21px;gap:20px}
-.project-inline summary>span{font-size:22px;color:var(--project-accent);transition:transform .4s var(--ease-out)}
+.project-inline summary{font-size:calc((14px) * var(--text-scale,1));font-weight:500;padding-block:21px;gap:20px}
+.project-inline summary>span{font-size:calc((22px) * var(--text-scale,1));color:var(--project-accent);transition:transform .4s var(--ease-out)}
 .project-inline[open] summary{color:var(--project-accent)}
 .project-inline[open] summary>span{transform:rotate(45deg)}
-.project-inline .project-details{font-size:16px;line-height:1.85;padding-bottom:27px}
+.project-inline .project-details{font-size:calc((16px) * var(--text-scale,1));line-height:1.85;padding-bottom:27px}
 .project-inline .project-details li+li{margin-top:15px}
 .project-inline[open] .project-details{animation:inlineDetailsIn .4s var(--ease-out) both}
 @supports(interpolate-size:allow-keywords){.project-inline{interpolate-size:allow-keywords}.project-inline::details-content{height:0;overflow:clip;transition:height .45s var(--ease-out),content-visibility .45s allow-discrete}.project-inline[open]::details-content{height:auto}}

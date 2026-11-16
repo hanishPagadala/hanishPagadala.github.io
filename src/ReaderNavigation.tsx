@@ -1,3 +1,4 @@
+import Localize from './Localize'
 import { useEffect, useRef } from 'react'
 
 const sections = [['home', 'Introduction'], ['projects', 'Projects'], ['experience', 'Experience'], ['about', 'About'], ['contact', 'Contact']]
@@ -21,7 +22,7 @@ export default function ReaderNavigation({ onSectionChange }: { onSectionChange:
     window.addEventListener('resize', schedule)
     return () => { cancelAnimationFrame(frame); window.removeEventListener('scroll', schedule); window.removeEventListener('resize', schedule) }
   }, [onSectionChange])
-  return <>
+  return <Localize><>
     <progress className="reading-progress" ref={progress} max="1" value="0" aria-label="Page reading progress" />
-  </>
+  </></Localize>
 }

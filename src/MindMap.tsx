@@ -1,5 +1,7 @@
+import { usePreferences } from './preferences-context'
+import Localize from './Localize'
 import { useEffect, useState } from 'react'
-import type { CSSProperties } from 'react'
+import type { CSSProperties, MouseEvent } from 'react'
 import { projects } from './projects'
 import './MindMap.css'
 
@@ -30,27 +32,44 @@ const leafPositions = [[24, 22], [76, 22], [18, 67], [82, 67], [50, 84]]
 const initialSummary = 'I’m Hanish—a Computer Engineering student connecting code, circuits, and people. Explore the branches to see the projects, experiences, and interests that shape my work.'
 
 export default function MindMap() {
+  const { preferences } = usePreferences()
   const [branchId, setBranchId] = useState<string | null>(null)
   const [entryId, setEntryId] = useState<string | null>(null)
   const [hovered, setHovered] = useState<string | null>(null)
   const [motion, setMotion] = useState(() => typeof matchMedia === 'undefined' || !matchMedia('(prefers-reduced-motion: reduce)').matches)
+  const [reaction, setReaction] = useState({ x: 50, y: 50, id: 0 })
+  function respond(event: MouseEvent<HTMLDivElement>) {
+    const bounds = event.currentTarget.getBoundingClientRect()
+    if (!bounds.width || !bounds.height) return
+    const target = (event.target as HTMLElement).closest('button')?.getBoundingClientRect()
+    const keyboard = event.detail === 0 && target
+    const x = keyboard ? target.left + target.width / 2 : event.clientX
+    const y = keyboard ? target.top + target.height / 2 : event.clientY
+    setReaction(previous => ({ x: Math.max(0, Math.min(100, (x - bounds.left) / bounds.width * 100)), y: Math.max(0, Math.min(100, (y - bounds.top) / bounds.height * 100)), id: previous.id + 1 }))
+  }
   const active = branches.find(branch => branch.id === branchId)
   const entry = active?.entries.find(item => item.id === entryId)
   const nodes = active ? active.entries : branches
   const positions = active ? leafPositions : overviewPositions
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }) }, [])
   useEffect(() => {
-    if (!motion || matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (preferences.reduceMotion || !motion || matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const panel = document.getElementById('map-detail')
     const animation = panel?.animate?.([{ opacity: 0.4, translate: '0 8px' }, { opacity: 1, translate: '0 0' }], { duration: 350, easing: 'cubic-bezier(.22,1,.36,1)' })
     return () => animation?.cancel()
-  }, [branchId, entryId, motion])
-  function reset() { setBranchId(null); setEntryId(null); setHovered(null) }
-  return <section className={`mindmap-page ${motion ? 'motion-on' : ''}`} id="visualize" aria-labelledby="mindmap-title">
-    <div className="map-topbar"><div><p className="eyebrow">AN EXPLORABLE PORTRAIT</p><h1 id="mindmap-title">A few worlds. <em>One Hanish.</em></h1></div><div className="map-actions"><button onClick={() => setMotion(!motion)} aria-pressed={motion}>{motion ? 'Pause motion' : 'Enable motion'}</button><a href="#home">Back to portfolio <span aria-hidden="true">↗</span></a></div></div>
+  }, [branchId, entryId, motion, preferences.reduceMotion])
+  useEffect(() => {
+    if (!branchId) return
+    const frame = requestAnimationFrame(() => document.querySelector<HTMLButtonElement>('.map-breadcrumb button:last-of-type')?.focus({ preventScroll: true }))
+    return () => cancelAnimationFrame(frame)
+  }, [branchId])
+  function reset() { setBranchId(null); setEntryId(null); setHovered(null); requestAnimationFrame(() => document.querySelector<HTMLButtonElement>('.map-center')?.focus({ preventScroll: true })) }
+  return <Localize><section className={`mindmap-page ${motion ? 'motion-on' : ''}`} id="visualize" aria-labelledby="mindmap-title">
+    <div className="map-topbar"><div><p className="eyebrow">AN EXPLORABLE PORTRAIT</p><h1 id="mindmap-title">A few worlds. <em>One Hanish.</em></h1></div><div className="map-actions"><button disabled={preferences.reduceMotion} onClick={() => setMotion(!motion)} aria-pressed={motion}>{motion ? 'Pause motion' : 'Enable motion'}</button><a href="#home">Back to portfolio <span aria-hidden="true">↗</span></a></div></div>
     <div className="map-breadcrumb"><button onClick={reset} aria-label="Show all mind map branches">Hanish</button>{active && <><span aria-hidden="true">/</span><button onClick={() => setEntryId(null)}>{active.title}</button></>}{entry && <><span aria-hidden="true">/</span><span>{entry.title}</span></>}</div>
-    <div className="map-layout"><div className="map-stage"><div className="map-canvas" role="group" aria-label={active ? `${active.title}: select a bubble to explore` : 'Hanish at the center of six connected branches'} style={{ '--branch-color': active?.color || 'var(--accent)' } as CSSProperties}>
+    <div className="map-layout"><div className="map-stage"><div className="map-canvas" onClick={respond} role="group" aria-label={active ? `${active.title}: select a bubble to explore` : 'Hanish at the center of six connected branches'} style={{ '--branch-color': active?.color || 'var(--accent)', '--response-x': `${reaction.x}%`, '--response-y': `${reaction.y}%` } as CSSProperties}>
       <div className="map-flow" aria-hidden="true"><span /><span /></div>
+      <div className="map-response-layer" aria-hidden="true"><span className="map-response-glow" />{reaction.id > 0 && motion && !preferences.reduceMotion && <span key={reaction.id} className="map-response-ripple" />}</div>
       <div className="map-rings" aria-hidden="true" />
       <svg className="map-wires" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">{nodes.map((node, i) => { const [x, y] = positions[i]; const selected = entryId === node.id || hovered === node.id; return <g key={`${active?.id || 'root'}-${node.id}`} style={{ '--wire': active?.color || branches[i].color, '--wire-delay': `${i * -.7}s` } as CSSProperties}><path d={`M50 50 C50 ${y} ${x} 50 ${x} ${y}`} className={selected ? 'selected' : ''} /><path d={`M50 50 C50 ${y} ${x} 50 ${x} ${y}`} className="map-signal" /></g> })}</svg>
       <button className="map-center" onClick={reset} aria-label="Hanish: return to all branches"><span className="center-orbit" aria-hidden="true" /><strong>Hanish</strong><span>{active ? active.short : 'CODE · CIRCUITS · CURIOSITY'}</span></button>
@@ -66,5 +85,5 @@ export default function MindMap() {
       {active && <button className="map-reset" onClick={reset}>← All connections</button>}
     </aside></div>
     <div className="map-footer"><p>Every branch is part of the same curiosity. Connections represent interests and shared skills.</p><a href="mailto:s_pagad@live.concordia.ca">Start a conversation ↗</a></div>
-  </section>
+  </section></Localize>
 }
