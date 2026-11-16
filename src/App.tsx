@@ -4,6 +4,7 @@ import MindMap from './MindMap'
 import { categories, projects } from './projects'
 import type { Category, Project } from './projects'
 import './App.css'
+import './Readability.css'
 
 const email = 's_pagad@live.concordia.ca'
 const github = 'https://github.com/hanishPagadala/'
