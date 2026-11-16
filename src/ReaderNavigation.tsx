@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 
 const sections = [['home', 'Introduction'], ['projects', 'Projects'], ['experience', 'Experience'], ['about', 'About'], ['contact', 'Contact']]
 
-export default function ReaderNavigation({ active, onSectionChange }: { active: string; onSectionChange: (id: string) => void }) {
+export default function ReaderNavigation({ onSectionChange }: { onSectionChange: (id: string) => void }) {
   const progress = useRef<HTMLProgressElement>(null)
   useEffect(() => {
     let frame = 0
@@ -23,6 +23,5 @@ export default function ReaderNavigation({ active, onSectionChange }: { active: 
   }, [onSectionChange])
   return <>
     <progress className="reading-progress" ref={progress} max="1" value="0" aria-label="Page reading progress" />
-    <nav className="reading-rail" aria-label="Section navigation">{sections.map(([id, label], index) => <a href={`#${id}`} aria-label={label} aria-current={active === id ? 'location' : undefined} key={id}><span className="rail-label">{label}</span><span className="rail-dot" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span></a>)}</nav>
   </>
 }

@@ -60,3 +60,9 @@ Control visibility: Controls.css gives the résumé a prominent secondary action
 
 Resume presentation now follows the supplied ARA Robotics reference: centered name/contact line, uppercase section headings with thin blue rules, right-aligned dates, and concise bullets. It uses selected projects plus a WIP summary; the complete collection remains on the portfolio. Only the approved email and public social links appear. Visible controls use reduced padding while retaining clear borders and touch target sizing.
 
+
+Content focus: three featured engineering stories (Robowars, hovercraft, News Sharing Protocol), three WIP projects in a compact workbench, and seven additional projects in an optional filtered archive. Removed project counters, side navigation, repeated starting-point links, and automatic scroll entrances. Continuous mind-map motion now defaults off but remains available. Supporting links are taken from supplied resume annotations; current external availability was not verified. CMHC remains broadly described because supplied titles/start dates differ. No project outcomes or media were invented.
+
+
+Additional projects are permanently visible, with discipline filters. Only individual project contribution details collapse. Filter changes use a brief staggered entrance, with subtle hover and inline-detail transitions; reduced-motion disables these effects.
+

@@ -33,7 +33,7 @@ export default function MindMap() {
   const [branchId, setBranchId] = useState<string | null>(null)
   const [entryId, setEntryId] = useState<string | null>(null)
   const [hovered, setHovered] = useState<string | null>(null)
-  const [motion, setMotion] = useState(() => typeof matchMedia === 'undefined' || !matchMedia('(prefers-reduced-motion: reduce)').matches)
+  const [motion, setMotion] = useState(() => false)
   const active = branches.find(branch => branch.id === branchId)
   const entry = active?.entries.find(item => item.id === entryId)
   const nodes = active ? active.entries : branches

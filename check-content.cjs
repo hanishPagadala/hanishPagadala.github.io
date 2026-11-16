@@ -35,7 +35,7 @@ for (const content of [html, resume]) {
   assert(content.includes('https://www.linkedin.com/in/sai-hanish-pagadala-a21599379/'), 'LinkedIn link missing')
 }
 assert(html.includes('June 2026–present'), 'IEEE role date missing')
-assert(html.includes('Work in progress only'), 'Ongoing-work control missing')
+assert(html.includes('Currently building'), 'Separate ongoing-work section missing')
 assert(html.includes('./resume.html'), 'Résumé link missing')
 const anchors = [...html.matchAll(/href="#([^"]+)"/g)].map(m => m[1])
 for (const anchor of anchors) assert(anchor === 'visualize' || html.includes(`id="${anchor}"`), `Broken anchor: ${anchor}`)
@@ -68,7 +68,16 @@ assert((html.match(/class="project-inline"/g) || []).length === 13, 'Each projec
 assert(!html.includes('<dialog'), 'Project overlays must be absent')
 
 assert(html.includes('aria-label="Page reading progress"'), 'Reading progress missing')
-assert((html.match(/class="start-point"/g) || []).length === 3, 'Expected three suggested starting points')
 assert(html.includes('Explore my mind map'), 'Exploration invitation missing')
 for (const id of ['04', '07', '11']) assert(html.includes('id="project-' + id + '"'), 'Featured destination missing: ' + id)
 
+const orderedProjects = [...html.matchAll(/<article[^>]*id="project-([0-9]+)"/g)].map(match => match[1])
+assert(orderedProjects.slice(0, 3).join(',') === '04,05,07', 'Featured stories must lead with robot, hovercraft, and protocol')
+assert(orderedProjects.slice(3, 6).join(',') === '01,02,03', 'WIP projects must be grouped separately')
+assert(new Set(orderedProjects).size === 13, 'Projects must appear once each')
+assert((html.match(/class="case-study"/g) || []).length === 3, 'Three engineering stories required')
+assert(!html.includes('reading-rail') && !html.includes('project-overview') && !html.includes('start-points'), 'Redundant navigation and counters must be absent')
+assert(html.includes('class="project-archive"'), 'Additional project section missing')
+assert(html.includes('CommuncationProtocols_NewsSharingProtocol'), 'Resume-provided source link missing')
+assert(html.includes('<section class="project-archive"'), 'Additional projects must be a permanently visible section')
+assert(!html.includes('<details class="project-archive"'), 'Additional projects must not require expansion')
