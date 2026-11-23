@@ -12,7 +12,7 @@ export default function PreferencesProvider({ children }: { children: ReactNode 
   })
   useEffect(() => {
     const root = document.documentElement
-    root.lang = preferences.language
+    root.lang = preferences.language === 'fr' ? 'fr-CA' : 'en-CA'
     document.title = preferences.language === 'fr' ? 'Hanish Pagadala — Portfolio en génie' : 'Hanish Pagadala — Engineering Portfolio'
     root.style.setProperty('--text-scale', String(preferences.textScale / 100))
     root.dataset.highContrast = String(preferences.highContrast)
